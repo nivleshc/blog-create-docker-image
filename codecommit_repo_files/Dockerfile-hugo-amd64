@@ -1,0 +1,12 @@
+FROM --platform=amd64 debian:stable-20230109-slim
+RUN apt update -y
+RUN apt install git wget -y
+ARG HUGO_VERSION=0.110.0
+ARG HUGO_PLATFORM=linux-amd64.deb
+RUN cd /tmp && wget https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_${HUGO_PLATFORM}
+RUN dpkg -i /tmp/hugo_extended_${HUGO_VERSION}_${HUGO_PLATFORM}
+RUN mkdir /www
+COPY websitefiles/ /www
+WORKDIR /www
+EXPOSE 1313
+CMD ["hugo", "server", "--buildDrafts", "--bind", "0.0.0.0"]

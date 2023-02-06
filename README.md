@@ -44,5 +44,11 @@ Ensure the following exist before deploying the code.
     `make terraform_apply`
     
     This will apply the changes to your AWS Account.
+
+8. Run
+    `make terraform_destroy`
+
+    to delete all resources that were provisioned for this solution.
+
     
-The full instructions are available at <workdpress link>
+Refer to the blog at <workdpress link> for more information.

@@ -1,0 +1,32 @@
+baseURL = 'http://localhost:8080'
+languageCode = 'en-us'
+title = 'Bulletin Board Server'
+theme = "hugo.386"
+preserveTaxonomyNames = true
+
+[params]
+    mainpagetitle = "Nivlesh's Blog on a Bulletin Board Server"
+    mainpagesubtitle = "A homage to the 90s"
+    mainpagedesc = "This is how nivleshc.wordpress.com would look like had it been hosted back in the 90s on a Bulletin Board Server"
+    copyrightname = "Nivlesh Chandra"
+
+[params.copyright]
+    name = "Nivlesh Chandra"
+    prefix = "Website built by Nivlesh Chandra using [hugo.386 theme by Max le Fou](https://gitlab.com/maxlefou/hugo.386)"
+
+[menu]
+    [[menu.main]]
+        identifier = "post"
+        name = "All posts"
+        url = "/post"
+        weight = 10
+    
+    [[menu.main]]
+        identifier = "about"
+        name = "About"
+        url = "/pages/about"
+        weight = 20
+
+[taxonomies]
+category = "categories"
+tag = "tags"

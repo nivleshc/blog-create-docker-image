@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
+      - echo Setting variables
+      - COMMIT_SHA=`echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c1-8`
+      - IMAGE_TAG="${IMAGE_TAG_PREFIX}_${COMMIT_SHA}"
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo commit_sha $CODEBUILD_RESOLVED_SOURCE_VERSION  shortened $COMMIT_SHA  IMAGE_TAG_PREFIX $IMAGE_TAG_PREFIX  IMAGE_TAG $IMAGE_TAG
+      - echo Building the hugo docker image...
+      - docker build -f Dockerfile-hugo-amd64 -t $ECR_REPO_NAME:$IMAGE_TAG .
+      - docker tag $ECR_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO_NAME:$IMAGE_TAG    
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO_NAME:$IMAGE_TAG
