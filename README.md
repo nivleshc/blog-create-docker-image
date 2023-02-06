@@ -48,7 +48,8 @@ Ensure the following exist before deploying the code.
 8. Run
     `make terraform_destroy`
 
-    to delete all resources that were provisioned for this solution.
+    to delete all resources that were provisioned for this solution.  
 
-    
-Refer to the blog at <workdpress link> for more information.
+
+
+Full documentation is available at https://nivleshc.wordpress.com/2023/02/06/build-a-hugo-docker-image-using-aws-codecommit-aws-codebuild-aws-codepipeline-and-amazon-elastic-container-registry/
